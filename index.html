@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Daily Ledger — Overlay test page for jev-adblock PR #1</title>
+  <style>
+    :root { --ink: #1d1d1f; --muted: #6b6b70; --rule: #e3e3e6; --accent: #c4161c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font: 17px/1.6 Georgia, "Times New Roman", serif; color: var(--ink); background: #fff; }
+    .masthead { border-bottom: 3px solid var(--ink); padding: 18px 24px 10px; display: flex; align-items: baseline; gap: 24px; }
+    .masthead h1 { margin: 0; font-size: 34px; letter-spacing: -0.5px; }
+    .masthead nav { font: 600 13px/1 system-ui, sans-serif; text-transform: uppercase; display: flex; gap: 16px; }
+    .masthead nav a { color: var(--ink); text-decoration: none; }
+    .reviewer-note { max-width: 1100px; margin: 16px auto 0; padding: 12px 16px; border: 1px dashed #999; border-radius: 6px; font: 14px/1.5 system-ui, sans-serif; background: #fafafa; }
+    .reviewer-note code { background: #eee; padding: 1px 4px; border-radius: 3px; }
+    .layout { max-width: 1100px; margin: 24px auto 260px; padding: 0 16px; display: grid; grid-template-columns: 1fr 300px; gap: 32px; }
+    article h2 { font-size: 38px; line-height: 1.15; margin: 0 0 8px; }
+    .byline { font: 13px system-ui, sans-serif; color: var(--muted); margin-bottom: 16px; }
+    .lead-img { height: 300px; border-radius: 4px; background: linear-gradient(135deg, #2b4a6f, #8aa6c1); margin-bottom: 16px; }
+    aside .box { border-top: 2px solid var(--ink); padding-top: 8px; margin-bottom: 24px; font: 15px/1.5 system-ui, sans-serif; }
+    aside .box h3 { margin: 0 0 8px; font-size: 14px; text-transform: uppercase; }
+    aside .box li { margin-bottom: 8px; }
+
+    /* Bottom floating ad, like the 100 px "down-floating" slot on uol.com.br */
+    .down-floating { position: fixed; left: 0; right: 0; bottom: 0; height: 100px; z-index: 9999; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; gap: 18px; font: 600 18px system-ui, sans-serif; }
+    .down-floating small { font-weight: 400; opacity: .7; }
+
+    /* LGPD cookie bar: 70 px tall, stacked ABOVE the floating ad (not on the viewport edge), no overlay word in its class */
+    .banner-lgpd-consent-container { position: fixed; left: 0; right: 0; bottom: 100px; height: 70px; z-index: 29999999; background: rgba(60, 60, 60, .95); color: #fff; display: flex; align-items: center; justify-content: center; gap: 24px; font: 14px system-ui, sans-serif; }
+    .banner-lgpd-consent-container button { background: #f5b800; border: 0; padding: 8px 28px; font-weight: 600; cursor: pointer; }
+
+    /* Google Funding Choices ad-block recovery message, same structure as served on uol.com.br */
+    .fc-dialog-container { position: fixed; inset: 0; z-index: 2147483647; display: flex; align-items: center; justify-content: center; }
+    .fc-dialog-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, .55); }
+    .fc-dialog { position: relative; width: 480px; max-width: calc(100vw - 32px); background: #fff; border-radius: 8px; padding: 28px 28px 20px; text-align: center; font: 16px/1.5 system-ui, sans-serif; box-shadow: 0 12px 40px rgba(0,0,0,.35); }
+    .fc-dialog h1 { font-size: 24px; margin: 0 0 12px; }
+    .fc-close { position: absolute; top: 10px; right: 12px; border: 0; background: none; font-size: 22px; cursor: pointer; }
+    .fc-button { display: block; width: 100%; margin: 10px 0 0; padding: 10px; border: 0; border-radius: 4px; background: #e8590c; color: #fff; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <h1>The Daily Ledger</h1>
+    <nav><a href="#">World</a><a href="#">Business</a><a href="#">Tech</a><a href="#">Opinion</a></nav>
+  </header>
+
+  <div class="reviewer-note">
+    <strong>Test page for <a href="https://github.com/fazlerocks/jev-adblock/pull/1">jev-adblock PR #1</a>.</strong>
+    Turn on <em>Hide consent and popup overlays</em> and <em>Hide a site's own promotions</em>, then reload.
+    On <code>main</code>, the cookie bar and the "browse without ads" dialog (shown after ~1.5 s, with the page scroll-locked) are never sent to Jev.
+    With the PR, both are judged and hidden, and the page scrolls again.
+    The structures match what uol.com.br serves (LGPD bar stacked over a 100 px floating ad; Google Funding Choices recovery message).
+  </div>
+
+  <div class="layout">
+    <article>
+      <h2>Central bank holds rates as markets rally into the close</h2>
+      <div class="byline">By Ana Ribeiro · Updated 5 October 2026</div>
+      <div class="lead-img" role="img" aria-label="Trading floor"></div>
+      <p>Policymakers left the benchmark rate unchanged on Wednesday, citing easing inflation and a labour market that has cooled without cracking. Stocks extended gains after the announcement, with financials and technology leading the advance.</p>
+      <p>The decision was widely expected. What moved markets was the statement's softer tone on future tightening, which traders read as an opening for cuts early next year. Two-year yields fell to their lowest level since spring.</p>
+      <p>"The balance of risks has shifted," the bank said, adding that it would watch wage growth and services prices closely over the coming months. Analysts noted that the committee vote was unanimous for the third meeting in a row.</p>
+      <p>Currency markets were calmer. The dollar slipped against a basket of major peers, while emerging-market currencies posted modest gains as investors returned to higher-yielding assets.</p>
+      <p>Commodities were mixed. Crude oil edged lower on signs of rising inventories, while gold held near a record as real yields declined.</p>
+      <p>Economists expect the next data releases on retail sales and consumer prices to set the tone for the December meeting, when the bank will also publish updated projections.</p>
+      <p>Corporate earnings season begins next week, with the largest banks reporting first. Margins are expected to narrow as deposit costs rise, though trading revenue may offset part of the pressure.</p>
+      <p>Bond investors have piled into longer maturities in recent weeks, betting that the tightening cycle is over. Fund flows into government debt reached their highest level of the year in September.</p>
+      <p>Small businesses remain cautious. A survey published on Tuesday showed hiring plans at their weakest in three years, even as sales expectations improved slightly.</p>
+      <p>Housing data due on Friday will offer another read on how higher borrowing costs are filtering through the economy.</p>
+    </article>
+    <aside>
+      <div class="box">
+        <h3>Most read</h3>
+        <ol>
+          <li>Five charts that explain the rate decision</li>
+          <li>Why mortgage rates may fall before policy does</li>
+          <li>The quiet comeback of regional banks</li>
+          <li>What the bond rally means for savers</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>Markets</h3>
+        <p>Index +1.4% · Bonds 10y 4.02% · USD −0.3% · Gold +0.2%</p>
+      </div>
+    </aside>
+  </div>
+
+  <div class="down-floating" id="floating-ad" data-google-query-id="CKjOy7nP">
+    <span>Mega Sale — up to 70% off electronics</span><small>Advertisement</small>
+  </div>
+
+  <div class="banner-lgpd-consent-container" id="cookie-bar">
+    <span>We use essential cookies and similar technologies in accordance with our Privacy Policy. By continuing to browse, you agree to these terms.</span>
+    <button type="button">OK</button>
+  </div>
+
+  <script>
+    // Funding Choices injects its message late and locks page scrolling while it is open.
+    setTimeout(() => {
+      const root = document.createElement("div");
+      root.className = "fc-ab-root";
+      root.innerHTML =
+        '<div class="fc-dialog-container"><div class="fc-dialog-overlay"></div>' +
+        '<div class="fc-ab-dialog fc-dialog" role="dialog" tabindex="0" aria-label="Want to browse without ads?">' +
+        '<button class="fc-close" aria-label="Close">×</button>' +
+        '<div class="fc-dialog-content"><h1 class="fc-dialog-headline-text">Want to browse without ads?</h1>' +
+        '<p class="fc-dialog-body-text">Subscribers read The Daily Ledger app without advertising, plus get exclusive stories, comments and member discounts.</p></div>' +
+        '<footer class="fc-dialog-footer"><button class="fc-button fc-button-whitelist">No, I prefer to allow ads</button>' +
+        '<button class="fc-button fc-cta-subscribe">Yes, I want to subscribe</button></footer></div></div>';
+      document.body.append(root);
+      document.body.style.overflow = "hidden";
+      root.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => { root.remove(); document.body.style.overflow = ""; }));
+    }, 1500);
+  </script>
+</body>
+</html>
